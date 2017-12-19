@@ -50,7 +50,7 @@ public class GreetingController {
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
-
+    @CrossOrigin
     @RequestMapping(value = "/api/{userId}", method=RequestMethod.GET)
     public ResponseEntity readBookmarks(@PathVariable String userId){//, @RequestBody String password) {
         UserModel user = new UserModel(userId);
