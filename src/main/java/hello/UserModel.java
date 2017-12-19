@@ -20,6 +20,13 @@ public class UserModel {
     private Boolean showBulletin;
     private ArrayList<String> accountTypes = new ArrayList<String>();
     private ArrayList<String> accountAmounts = new ArrayList<String>();
+    
+    private String  mongoUser       = "mongouser";
+    private String  mongoPass       = "mongouser";
+    private String  databaseName    = "sampledb";
+    private String  mongoHost       = "mongodb";
+    private int     mongoPort       = 27017;
+
 
     public UserModel(){
     }
@@ -60,9 +67,17 @@ public class UserModel {
     }
 
     public Boolean validateUser(){
-        MongoClient mongoClient = new MongoClient("localhost",27017);
+
+        // Set credentials      
+        MongoCredential credential = MongoCredential.createCredential(mongoUser, databaseName, mongoPass.toCharArray());
+        ServerAddress serverAddress = new ServerAddress(mongoHost, mongoPort);
+
+        // Mongo Client
+        MongoClient mongoClient = new MongoClient(serverAddress,Arrays.asList(credential)); 
+        
+        //MongoClient mongoClient = new MongoClient("localhost",27017);
+        
         MongoDatabase database = mongoClient.getDatabase("test_db");
-    
         MongoCollection<Document> collection = database.getCollection("users");
         collection.find(eq("username", this.username)).forEach(validatePrintBlock);
         
@@ -73,7 +88,16 @@ public class UserModel {
     }
 
     public void getUserAccounts(){
-        MongoClient mongoClient = new MongoClient("localhost",27017);
+
+        // Set credentials      
+        MongoCredential credential = MongoCredential.createCredential(mongoUser, databaseName, mongoPass.toCharArray());
+        ServerAddress serverAddress = new ServerAddress(mongoHost, mongoPort);
+
+        // Mongo Client
+        MongoClient mongoClient = new MongoClient(serverAddress,Arrays.asList(credential)); 
+        
+        //MongoClient mongoClient = new MongoClient("localhost",27017);
+        
         MongoDatabase database = mongoClient.getDatabase("test_db");
         MongoCollection<Document> collection = database.getCollection("users");
         collection.find(eq("username", this.username)).forEach(getAccountsPrintBlock);
