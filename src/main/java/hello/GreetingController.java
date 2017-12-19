@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;;
 import java.util.ArrayList;
-
 
 
 
@@ -33,14 +35,20 @@ public class GreetingController {
     //     //                     String.format(template, name));
     //      return new ResponseEntity(HttpStatus.OK);
     // }
-
+    @CrossOrigin
     @RequestMapping(value = "/api/validate", method=RequestMethod.POST)
     public ResponseEntity validate(@RequestBody UserModel login){//, @RequestBody String password) {
         
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        responseHeaders.set("Access-Control-Max-Age", "3600");
+        responseHeaders.set("Access-Control-Allow-Headers", "x-requested-with");
+        responseHeaders.setContentType(MediaType.APPLICATION_JSON);
+
         if (login.validateUser()){
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity("",responseHeaders,HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity(login.getUsername(),HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/api/{userId}", method=RequestMethod.GET)
@@ -49,6 +57,8 @@ public class GreetingController {
         user.getUserAccounts();
         ArrayList<String> userAccountTypes = user.getAccountTypes();
         ArrayList<String> userAccountAmounts = user.getAccountAmounts();
+        JSONObject jResponse = new JSONObject();
+        jResponse.put("bulletin", user.getShowBulletin());
         ArrayList<JSONObject> accounts = new ArrayList<JSONObject>();
         for (int i=0; i<userAccountTypes.size(); i++){
             JSONObject account = new JSONObject();
@@ -56,7 +66,15 @@ public class GreetingController {
             account.put("amount", userAccountAmounts.get(i));
             accounts.add(account);
         }
-        return new ResponseEntity(accounts,HttpStatus.OK);
+        jResponse.put("accounts", accounts);
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Access-Control-Allow-Origin", "*");
+        responseHeaders.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        responseHeaders.set("Access-Control-Max-Age", "3600");
+        responseHeaders.set("Access-Control-Allow-Headers", "x-requested-with");
+
+        return new ResponseEntity(jResponse,responseHeaders,HttpStatus.OK);
     }
 
 }

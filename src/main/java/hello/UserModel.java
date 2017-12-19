@@ -17,6 +17,7 @@ public class UserModel {
     private String username;
     private String password; 
     private String dbpw = "";
+    private Boolean showBulletin;
     private ArrayList<String> accountTypes = new ArrayList<String>();
     private ArrayList<String> accountAmounts = new ArrayList<String>();
 
@@ -39,19 +40,23 @@ public class UserModel {
     }
 
     public String getPassword() {
-        return username;
+        return this.username;
     }
 
     public String getUsername(){
-        return username;
+        return this.username;
     }
 
     public ArrayList<String> getAccountTypes(){
-        return accountTypes;
+        return this.accountTypes;
     }
 
     public ArrayList<String> getAccountAmounts(){
-        return accountAmounts;
+        return this.accountAmounts;
+    }
+
+    public Boolean getShowBulletin(){
+        return this.showBulletin;
     }
 
     public Boolean validateUser(){
@@ -91,10 +96,11 @@ public class UserModel {
 			// parse result obtained from collection
 
 			Collection<Document> accounts = (Collection) document.get("accounts");
+            showBulletin = (Boolean) document.get("bulletins");
             for (int i=0; i<accounts.size(); i++){
                 ArrayList accountsArray = new ArrayList<Document>(accounts);
                 Document accountDoc = (Document) accountsArray.get(i);
-                String type = (String) accountDoc.get("type");
+                String type =   (String) accountDoc.get("type");
                 String amount = (String) accountDoc.get("amount");
                 accountTypes.add(type);
                 accountAmounts.add(amount);
