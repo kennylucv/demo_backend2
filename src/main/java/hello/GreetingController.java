@@ -69,7 +69,6 @@ public class GreetingController {
         jResponse.put("accounts", accounts);
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("Access-Control-Allow-Origin", "*");
         responseHeaders.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         responseHeaders.set("Access-Control-Max-Age", "3600");
         responseHeaders.set("Access-Control-Allow-Headers", "x-requested-with");
