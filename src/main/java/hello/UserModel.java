@@ -77,7 +77,7 @@ public class UserModel {
         
         //MongoClient mongoClient = new MongoClient("localhost",27017);
         
-        MongoDatabase database = mongoClient.getDatabase("test_db");
+        MongoDatabase database = mongoClient.getDatabase("sampledb");
         MongoCollection<Document> collection = database.getCollection("users");
         collection.find(eq("username", this.username)).forEach(validatePrintBlock);
         
@@ -98,7 +98,7 @@ public class UserModel {
         
         //MongoClient mongoClient = new MongoClient("localhost",27017);
         
-        MongoDatabase database = mongoClient.getDatabase("test_db");
+        MongoDatabase database = mongoClient.getDatabase("sampledb");
         MongoCollection<Document> collection = database.getCollection("users");
         collection.find(eq("username", this.username)).forEach(getAccountsPrintBlock);
     }
