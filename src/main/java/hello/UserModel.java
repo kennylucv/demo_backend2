@@ -23,8 +23,9 @@ public class UserModel {
     
     private String  mongoUser       = "mongouser";
     private String  mongoPass       = "mongouser";
-    private String  databaseName    = "sampledb";
-    private String  mongoHost       = "172.30.168.66";
+    //private String  databaseName    = "sampledb";
+    private String  databaseName    = "test_db";
+    private String  mongoHost       = "localhost";
     private int     mongoPort       = 27017;
 
 
@@ -73,11 +74,11 @@ public class UserModel {
         ServerAddress serverAddress = new ServerAddress(mongoHost, mongoPort);
 
         // Mongo Client
-        MongoClient mongoClient = new MongoClient(serverAddress,Arrays.asList(credential)); 
+        MongoClient mongoClient = new MongoClient(serverAddress);//,Arrays.asList(credential)); 
         
         //MongoClient mongoClient = new MongoClient("localhost",27017);
         
-        MongoDatabase database = mongoClient.getDatabase("sampledb");
+        MongoDatabase database = mongoClient.getDatabase(databaseName);
         MongoCollection<Document> collection = database.getCollection("users");
         collection.find(eq("username", this.username)).forEach(validatePrintBlock);
         
@@ -94,11 +95,11 @@ public class UserModel {
         ServerAddress serverAddress = new ServerAddress(mongoHost, mongoPort);
 
         // Mongo Client
-        MongoClient mongoClient = new MongoClient(serverAddress,Arrays.asList(credential)); 
+        MongoClient mongoClient = new MongoClient(serverAddress);//,Arrays.asList(credential)); 
         
         //MongoClient mongoClient = new MongoClient("localhost",27017);
         
-        MongoDatabase database = mongoClient.getDatabase("sampledb");
+        MongoDatabase database = mongoClient.getDatabase(databaseName);
         MongoCollection<Document> collection = database.getCollection("users");
         collection.find(eq("username", this.username)).forEach(getAccountsPrintBlock);
     }

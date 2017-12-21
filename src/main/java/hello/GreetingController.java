@@ -14,9 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;;
+import org.json.simple.JSONObject;
 import java.util.ArrayList;
-
 
 
 @RestController
@@ -29,12 +28,13 @@ public class GreetingController {
     //     //this.userRepository = userRepository;
     // }
 
-    // @RequestMapping("/greeting")
-    // public ResponseEntity greeting(@RequestParam(value="name", defaultValue="World") String name) {
-    //     // return new Greeting(counter.incrementAndGet(),
-    //     //                     String.format(template, name));
-    //      return new ResponseEntity(HttpStatus.OK);
-    // }
+    @RequestMapping("/greeting")
+    public ResponseEntity greeting(@RequestParam(value="name", defaultValue="World") String name) {
+        // return new Greeting(counter.incrementAndGet(),
+        //                     String.format(template, name));
+         return new ResponseEntity("Hello",HttpStatus.OK);
+    }
+
     @CrossOrigin
     @RequestMapping(value = "/api/validate", method=RequestMethod.POST)
     public ResponseEntity validate(@RequestBody UserModel login){//, @RequestBody String password) {
