@@ -17,3 +17,5 @@ COPY api.war /opt/ibm/wlp/usr/servers/defaultServer/dropins
 #     && rm -rf /output/workarea /output/logs
 
 EXPOSE 9080
+
+ENV LICENSE $LICENSE
