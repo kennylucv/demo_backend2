@@ -74,7 +74,7 @@ public class UserModel {
         ServerAddress serverAddress = new ServerAddress(mongoHost, mongoPort);
 
         // Mongo Client
-        MongoClient mongoClient = new MongoClient(serverAddress);//,Arrays.asList(credential)); 
+        MongoClient mongoClient = new MongoClient(serverAddress,Arrays.asList(credential)); 
         
         //MongoClient mongoClient = new MongoClient("localhost",27017);
         
@@ -95,7 +95,7 @@ public class UserModel {
         ServerAddress serverAddress = new ServerAddress(mongoHost, mongoPort);
 
         // Mongo Client
-        MongoClient mongoClient = new MongoClient(serverAddress);//,Arrays.asList(credential)); 
+        MongoClient mongoClient = new MongoClient(serverAddress,Arrays.asList(credential)); 
         
         //MongoClient mongoClient = new MongoClient("localhost",27017);
         
