@@ -24,8 +24,8 @@ public class UserModel {
     private String  mongoUser       = "mongouser";
     private String  mongoPass       = "mongouser";
     private String  databaseName    = "sampledb";
-    //private String  databaseName    = "test_db";
-    private String  mongoHost       = "172.17.0.4";
+    //private String  databaseName    = "t";
+    private String  mongoHost       = "172.17.0.3";
     private int     mongoPort       = 27017;
 
 
