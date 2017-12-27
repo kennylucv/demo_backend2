@@ -21,11 +21,11 @@ public class UserModel {
     private ArrayList<String> accountTypes = new ArrayList<String>();
     private ArrayList<String> accountAmounts = new ArrayList<String>();
     
-    private String  mongoUser       = "mongouser";
-    private String  mongoPass       = "mongouser";
+    private String  mongoUser       = "dbuser";
+    private String  mongoPass       = "dbuser";
     private String  databaseName    = "sampledb";
     //private String  databaseName    = "t";
-    private String  mongoHost       = "172.17.0.3";
+    private String  mongoHost       = "172.30.89.30";
     private int     mongoPort       = 27017;
 
 
